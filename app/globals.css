@@ -1,0 +1,967 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===================== THEME TOKENS (dark only) ===================== */
+:root {
+  --bg0: #05060d;
+  --card: #070a17;
+  --card2: #0a0e1f;
+  --surface: #0a0d1a;
+  --muted: #8b93a6;
+  --low: #5c6478;
+  --text-primary: #ffffff;
+  --text-secondary: #c7cbd6;
+  --text-tertiary: #aeb4c3;
+  --border-soft: rgba(255, 255, 255, 0.1);
+  --border-softer: rgba(255, 255, 255, 0.06);
+  --panel-tint: rgba(255, 255, 255, 0.04);
+  --panel-tint-strong: rgba(255, 255, 255, 0.07);
+  --scrollbar-track: #05060d;
+  --scrollbar-thumb: rgba(255, 255, 255, 0.14);
+  --scrollbar-thumb-hover: rgba(47, 111, 237, 0.55);
+  /* dark, moody overlays used on photographic hero sections (portfolio, case
+     studies, services, contact) so the tone stays consistent everywhere */
+  --hero-ov-1: rgba(5, 6, 13, 0.82);
+  --hero-ov-2: rgba(5, 6, 13, 0.62);
+  --hero-ov-3: rgba(5, 6, 13, 0.72);
+  --hero-vg-1: rgba(5, 6, 13, 0.15);
+  --hero-vg-2: rgba(5, 6, 13, 0.45);
+  --hero-vg-3: rgba(5, 6, 13, 0.85);
+  color-scheme: dark;
+}
+
+/* ===================== GLOBAL / RESPONSIVE BASE ===================== */
+
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  /* NOTE: use `clip` (not `hidden`) here — `overflow-x: hidden` on html/body
+     turns them into scroll-clipping ancestors in most browsers, which breaks
+     `position: sticky` (and can affect `position: fixed` with certain
+     transformed ancestors) for every descendant, including the navbar.
+     `clip` still prevents horizontal scrollbars from decorative elements
+     bleeding off-screen, but does not establish that broken containing
+     context, so the sticky navbar keeps working correctly on scroll. */
+  overflow-x: clip;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background: var(--bg0);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+}
+
+::selection {
+  background: #2f6fed;
+  color: #fff;
+}
+
+.grad-text {
+  background: linear-gradient(90deg, #3b82f6, #7dd3fc);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ===================== GRAIN TEXTURE ===================== */
+
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ===================== HEADINGS ===================== */
+
+.heading-line {
+  overflow: hidden;
+  display: block;
+}
+
+.heading-inner {
+  display: block;
+  transform: translateY(110%);
+  will-change: transform;
+}
+
+/* ===================== NAVBAR ===================== */
+
+.nav-fade-in {
+  animation: navFadeIn 0.55s ease-out both;
+}
+
+@keyframes navFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-fade-in {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/* ===================== CUSTOM CURSOR ===================== */
+
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 60;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  background: #fff;
+  mix-blend-mode: difference;
+}
+
+.cursor-ring {
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  mix-blend-mode: difference;
+  transition:
+    width 0.25s ease,
+    height 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease;
+}
+
+.cursor-ring.is-active {
+  width: 56px;
+  height: 56px;
+  border-color: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.cursor-ring.is-pressed {
+  width: 26px;
+  height: 26px;
+  transition:
+    width 0.15s ease,
+    height 0.15s ease;
+}
+
+html.has-custom-cursor,
+html.has-custom-cursor a,
+html.has-custom-cursor button {
+  cursor: none;
+}
+
+/* Disable custom cursor behavior on touch devices */
+@media (hover: none), (pointer: coarse) {
+  html.has-custom-cursor,
+  html.has-custom-cursor a,
+  html.has-custom-cursor button {
+    cursor: auto;
+  }
+
+  .cursor-dot,
+  .cursor-ring {
+    display: none;
+  }
+}
+
+/* ===================== SCROLLBAR ===================== */
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 999px;
+  border: 2px solid var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+/* ===================== SCROLL CUE ===================== */
+
+.scroll-cue {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.scroll-cue .line {
+  width: 1px;
+  height: 34px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.5),
+    transparent
+  );
+  overflow: hidden;
+  position: relative;
+}
+
+.scroll-cue .line::after {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    #5b8def
+  );
+  animation: scrollCue 2.2s ease-in-out infinite;
+}
+
+@keyframes scrollCue {
+  0% {
+    top: -100%;
+  }
+
+  60% {
+    top: 100%;
+  }
+
+  100% {
+    top: 100%;
+  }
+}
+
+/* ===================== TECH MARQUEE ===================== */
+
+.marquee-wrap {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  max-width: none;
+}
+
+.tech-pill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 22px;
+  margin-right: 14px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+  white-space: nowrap;
+
+  transition:
+    transform 0.35s ease,
+    border-color 0.35s ease,
+    background 0.35s ease;
+}
+
+.tech-pill:hover {
+  transform: translateY(-3px) scale(1.04);
+  border-color: rgba(47, 111, 237, 0.4);
+  background: rgba(47, 111, 237, 0.06);
+}
+
+/* ===================== ABOUT PAGE ICON BADGES ===================== */
+
+.check-ico {
+  width: 20px;
+  height: 20px;
+  border-radius: 9999px;
+  border: 1.5px solid rgba(59, 130, 246, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stat-ico {
+  width: 56px;
+  height: 56px;
+  border-radius: 9999px;
+  border: 1.5px solid rgba(59, 130, 246, 0.35);
+  background: radial-gradient(
+    circle at 50% 30%,
+    rgba(59, 130, 246, 0.12),
+    transparent 70%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step-ico {
+  width: 64px;
+  height: 64px;
+  border-radius: 9999px;
+  border: 1.5px solid rgba(59, 130, 246, 0.45);
+  background: radial-gradient(
+    circle at 50% 30%,
+    rgba(59, 130, 246, 0.14),
+    transparent 70%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+.step-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: #3b82f6;
+  box-shadow: 0 0 8px 2px rgba(59, 130, 246, 0.7);
+}
+
+.timeline-line {
+  position: absolute;
+  top: 32px;
+  left: 0;
+  right: 0;
+  height: 0;
+  border-top: 1.5px dashed rgba(59, 130, 246, 0.3);
+  z-index: 1;
+}
+
+.timeline-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(
+    90deg,
+    #2f6fed,
+    #5b8def
+  );
+  transform-origin: left;
+}
+
+.value-ico,
+.service-ico {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  border: 1px solid rgba(59, 130, 246, 0.35);
+  background: rgba(59, 130, 246, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tilt-card {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.avatar-photo {
+  background: linear-gradient(
+    160deg,
+    #1e2740,
+    #0c1122 70%
+  );
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.skill-pill {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 12px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #c7cbd6;
+}
+
+.blob {
+  filter: blur(0.5px);
+}
+
+/* ===================== CONTACT PAGE ===================== */
+
+.hero-dash {
+  height: 3px;
+  border-radius: 2px;
+}
+
+.contact-input,
+.contact-select,
+.contact-textarea {
+  width: 100%;
+  max-width: 100%;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 10px;
+  padding: 11px 14px 11px 40px;
+  font-size: 13.5px;
+  color: #e5e7ef;
+
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease;
+}
+
+.contact-input::placeholder,
+.contact-textarea::placeholder {
+  color: #5c6478;
+}
+
+.contact-input:focus,
+.contact-select:focus,
+.contact-textarea:focus {
+  outline: none;
+  border-color: rgba(47, 111, 237, 0.55);
+  background: rgba(47, 111, 237, 0.05);
+}
+
+.contact-textarea {
+  padding-left: 14px;
+  resize: vertical;
+  min-height: 110px;
+}
+
+.contact-select {
+  appearance: none;
+  padding-left: 14px;
+  padding-right: 34px;
+  cursor: pointer;
+}
+
+.contact-field-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.contact-select-chevron {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.info-ico {
+  width: 52px;
+  height: 52px;
+  border-radius: 9999px;
+  background: radial-gradient(
+    circle at 32% 28%,
+    rgba(139, 92, 246, 0.35),
+    rgba(47, 111, 237, 0.18) 60%,
+    transparent 80%
+  );
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  box-shadow: 0 0 20px -4px rgba(139, 92, 246, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #cfd6ff;
+}
+
+.feature-ico {
+  width: 48px;
+  height: 48px;
+  border-radius: 9999px;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.dot-texture {
+  background-image: radial-gradient(
+    rgba(91, 141, 239, 0.55) 1px,
+    transparent 1.5px
+  );
+  background-size: 14px 14px;
+}
+
+/* ===================== AMBIENT ANIMATED BACKGROUND ===================== */
+
+.ambient-bg {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.ambient-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(46px);
+  opacity: 0.45;
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.ambient-orb--a {
+  top: -10%;
+  left: -8%;
+  width: min(48vw, 520px);
+  height: min(48vw, 520px);
+  background: radial-gradient(
+    circle at 35% 30%,
+    rgba(47, 111, 237, 0.5),
+    transparent 70%
+  );
+  animation: ambientDriftA 26s ease-in-out infinite;
+}
+
+.ambient-orb--b {
+  top: 30%;
+  right: -12%;
+  width: min(44vw, 460px);
+  height: min(44vw, 460px);
+  background: radial-gradient(
+    circle at 60% 40%,
+    rgba(139, 92, 246, 0.34),
+    transparent 70%
+  );
+  animation: ambientDriftB 30s ease-in-out infinite;
+}
+
+.ambient-orb--c {
+  display: block;
+  bottom: -14%;
+  left: 32%;
+  width: min(38vw, 400px);
+  height: min(38vw, 400px);
+  background: radial-gradient(
+    circle at 45% 45%,
+    rgba(236, 72, 153, 0.22),
+    transparent 70%
+  );
+  animation: ambientDriftC 34s ease-in-out infinite;
+}
+
+.ambient-bg {
+  animation: ambientHueDrift 22s ease-in-out infinite;
+}
+
+.ambient-grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.25;
+
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.035) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.035) 1px,
+      transparent 1px
+    );
+
+  background-size: 46px 46px;
+
+  -webkit-mask-image: radial-gradient(
+    ellipse 80% 60% at 50% 0%,
+    #000 20%,
+    transparent 75%
+  );
+
+  mask-image: radial-gradient(
+    ellipse 80% 60% at 50% 0%,
+    #000 20%,
+    transparent 75%
+  );
+}
+
+@keyframes ambientDriftA {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(4vw, 5vh) scale(1.12);
+  }
+}
+
+@keyframes ambientDriftB {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(-5vw, -3vh) scale(1.08);
+  }
+}
+
+@keyframes ambientDriftC {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(-3vw, -6vh) scale(1.15);
+  }
+}
+
+@keyframes ambientHueDrift {
+  0%,
+  100% {
+    filter: hue-rotate(0deg);
+  }
+
+  50% {
+    filter: hue-rotate(18deg);
+  }
+}
+
+/* ===================== SCROLL PROGRESS BAR ===================== */
+
+.scroll-progress-track {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.05);
+  pointer-events: none;
+}
+
+.scroll-progress-fill {
+  height: 100%;
+  width: 100%;
+  transform-origin: left;
+  transform: scaleX(0);
+  background: linear-gradient(90deg, #2f6fed, #8b5cf6, #ec4899);
+  background-size: 200% auto;
+  animation: gradientShift 4s linear infinite;
+  box-shadow: 0 0 12px 1px rgba(139, 92, 246, 0.6);
+  will-change: transform;
+}
+
+/* ===================== SHIMMERING GRADIENT TEXT =====================
+   Applies automatically to every heading/label already using the site's
+   `bg-gradient-to-r ... bg-clip-text text-transparent` pattern — no markup
+   changes needed on any page. */
+[class*="bg-clip-text"] {
+  background-size: 200% auto;
+  animation: gradientShift 5s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ===================== ICON BADGE MICRO-INTERACTIONS =====================
+   Every round/rounded icon badge already used across About, Services,
+   Portfolio, Case Studies and Contact gets a lively hover pop + glow —
+   again, zero per-page markup changes required. */
+.check-ico,
+.stat-ico,
+.step-ico,
+.value-ico,
+.service-ico,
+.info-ico,
+.feature-ico {
+  transition:
+    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.4s ease,
+    border-color 0.4s ease,
+    background 0.4s ease;
+}
+
+.check-ico:hover,
+.stat-ico:hover,
+.step-ico:hover,
+.value-ico:hover,
+.service-ico:hover,
+.info-ico:hover,
+.feature-ico:hover {
+  transform: scale(1.14) rotate(-6deg);
+  box-shadow: 0 0 26px -4px rgba(59, 130, 246, 0.65);
+}
+
+/* group-hover variant so cards whose icon sits inside a hovered parent
+   (`.group` + `.group-hover:...`) also get the pop, matching existing
+   Tailwind group-hover conventions already used throughout the site */
+.group:hover .check-ico,
+.group:hover .stat-ico,
+.group:hover .step-ico,
+.group:hover .value-ico,
+.group:hover .service-ico,
+.group:hover .info-ico,
+.group:hover .feature-ico {
+  transform: scale(1.14) rotate(-6deg);
+  box-shadow: 0 0 26px -4px rgba(59, 130, 246, 0.65);
+}
+
+/* ===================== MAGNETIC BUTTON POLISH =====================
+   `.magnetic-btn` is already applied by the MagneticLink component on
+   every primary CTA site-wide (nav, hero, services, contact...) — adding
+   a shine sweep + lift here upgrades all of them in one place. */
+.magnetic-btn {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
+}
+
+.magnetic-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    120deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.35) 50%,
+    transparent 80%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.7s ease;
+}
+
+.magnetic-btn:hover::before {
+  transform: translateX(120%);
+}
+
+.magnetic-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+}
+
+/* ===================== NAV LINK UNDERLINE SWEEP ===================== */
+
+.nav-link {
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: -2px;
+  height: 1.5px;
+  background: linear-gradient(90deg, #2f6fed, #8b5cf6);
+  border-radius: 2px;
+  transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-link:hover::after,
+.nav-link--active::after {
+  right: 0;
+}
+
+/* ===================== HERO PHOTO — CINEMATIC REVEAL =====================
+   Runs as a plain CSS animation (no JS/hydration dependency) so the image
+   is guaranteed to paint immediately — a subtle Ken-Burns zoom-out that
+   also doubles as extra first-impression polish on the photographic hero
+   sections (Portfolio / Case Studies / Services / Contact). */
+.hero-photo > div:first-child {
+  animation: heroZoomIn 1.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes heroZoomIn {
+  from {
+    transform: scale(1.08);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient-bg,
+  .ambient-orb,
+  [class*="bg-clip-text"],
+  .scroll-progress-fill,
+  .hero-photo > div:first-child {
+    animation: none !important;
+  }
+}
+
+/* ===================== BADGE / EYEBROW PILLS =====================
+   The small uppercase "eyebrow" pills (Our Portfolio, Case Study, etc.)
+   already share this border/background pattern site-wide — give them a
+   gentle breathing glow so the first thing a visitor's eye catches feels
+   alive. */
+[class*="border-brand-500/20"] {
+  animation: badgeGlow 3.2s ease-in-out infinite;
+}
+
+@keyframes badgeGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 0px 0px rgba(47, 111, 237, 0);
+  }
+  50% {
+    box-shadow: 0 0 16px 1px rgba(47, 111, 237, 0.35);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [class*="border-brand-500/20"] {
+    animation: none !important;
+  }
+}
+
+/* ===================== RESPONSIVE ===================== */
+
+@media (max-width: 1024px) {
+  .timeline-line {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  html,
+  body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+  }
+
+  .ambient-orb {
+    filter: blur(32px);
+    opacity: 0.35;
+  }
+
+  .ambient-orb--a {
+    width: 70vw;
+    height: 70vw;
+    left: -25%;
+  }
+
+  .ambient-orb--b {
+    width: 65vw;
+    height: 65vw;
+    right: -25%;
+  }
+
+  .marquee-wrap {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .tech-pill {
+    padding: 9px 17px;
+    margin-right: 10px;
+  }
+
+  .contact-input,
+  .contact-select,
+  .contact-textarea {
+    font-size: 13px;
+  }
+}
+
+/* ===================== REDUCED MOTION ===================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .heading-inner {
+    transform: none !important;
+  }
+
+  .scroll-cue .line::after {
+    animation: none;
+  }
+
+  .ambient-orb {
+    animation: none;
+  }
+}
