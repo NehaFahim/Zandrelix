@@ -97,7 +97,6 @@
 
 
 
-
 "use client";
 
 import { useLayoutEffect } from "react";
@@ -108,22 +107,10 @@ let registered = false;
 
 export default function ServicesAnimations() {
   useLayoutEffect(() => {
-    /*
-     * ============================================================
-     * GSAP REGISTRATION
-     * ============================================================
-     */
-
     if (!registered) {
       gsap.registerPlugin(ScrollTrigger);
       registered = true;
     }
-
-    /*
-     * ============================================================
-     * MEDIA QUERIES
-     * ============================================================
-     */
 
     const reduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
@@ -133,22 +120,7 @@ export default function ServicesAnimations() {
       "(pointer: fine)"
     ).matches;
 
-    /*
-     * ============================================================
-     * GSAP CONTEXT
-     *
-     * Important for Next.js / React Strict Mode.
-     * Prevents old animations and triggers from remaining alive.
-     * ============================================================
-     */
-
     const ctx = gsap.context(() => {
-      /*
-       * ==========================================================
-       * REDUCED MOTION
-       * ==========================================================
-       */
-
       if (reduced) {
         gsap.set(
           [
@@ -170,27 +142,23 @@ export default function ServicesAnimations() {
         return;
       }
 
-      /*
-       * ==========================================================
-       * HERO ENTRANCE
-       * ==========================================================
-       */
+      /* ================= HERO ================= */
 
-      const eyebrow =
-        document.getElementById("servicesEyebrow");
+      const eyebrow = document.getElementById(
+        "servicesEyebrow"
+      );
 
-      const heading =
-        document.querySelectorAll<HTMLElement>(
-          "#servicesHeading .heading-inner"
-        );
+      const heading = gsap.utils.toArray<HTMLElement>(
+        "#servicesHeading .heading-inner"
+      );
 
-      const subtitle =
-        document.getElementById("servicesSub");
+      const subtitle = document.getElementById(
+        "servicesSub"
+      );
 
-      const trustBadges =
-        document.querySelectorAll<HTMLElement>(
-          ".trust-badge"
-        );
+      const trustBadges = gsap.utils.toArray<HTMLElement>(
+        ".trust-badge"
+      );
 
       const heroTimeline = gsap.timeline({
         defaults: {
@@ -264,16 +232,11 @@ export default function ServicesAnimations() {
         );
       }
 
-      /*
-       * ==========================================================
-       * CORE SERVICES
-       * ==========================================================
-       */
+      /* ================= SERVICE CARDS ================= */
 
-      const serviceCards =
-        gsap.utils.toArray<HTMLElement>(
-          ".service-card"
-        );
+      const serviceCards = gsap.utils.toArray<HTMLElement>(
+        ".service-card"
+      );
 
       if (serviceCards.length) {
         gsap.set(serviceCards, {
@@ -283,40 +246,25 @@ export default function ServicesAnimations() {
 
         ScrollTrigger.create({
           trigger: "#servicesGrid",
-
           start: "top 85%",
-
           once: true,
-
-          invalidateOnRefresh: true,
 
           onEnter: () => {
             gsap.to(serviceCards, {
               opacity: 1,
               y: 0,
-
               duration: 0.65,
-
               stagger: 0.09,
-
               ease: "power3.out",
-
-              overwrite: "auto",
+              overwrite: true,
             });
           },
         });
       }
 
-      /*
-       * ==========================================================
-       * DESKTOP CARD TILT
-       *
-       * IMPORTANT:
-       * Only enable this on fine pointer devices.
-       *
-       * Touch/mobile devices will NOT get mouse tilt.
-       * ==========================================================
-       */
+      /* ================= CARD TILT ================= */
+
+      const removeTiltListeners: Array<() => void> = [];
 
       if (fine && serviceCards.length) {
         serviceCards.forEach((card) => {
@@ -337,9 +285,10 @@ export default function ServicesAnimations() {
               ease: "power2.out",
             }
           );
-card.style.perspective = "800px";
 
-          const handleMove = (e: MouseEvent) => {
+          card.style.perspective = "800px";
+
+          const handleMove = (event: MouseEvent) => {
             const rect =
               card.getBoundingClientRect();
 
@@ -351,12 +300,12 @@ card.style.perspective = "800px";
             }
 
             const relX =
-              (e.clientX - rect.left) /
+              (event.clientX - rect.left) /
                 rect.width -
               0.5;
 
             const relY =
-              (e.clientY - rect.top) /
+              (event.clientY - rect.top) /
                 rect.height -
               0.5;
 
@@ -379,10 +328,7 @@ card.style.perspective = "800px";
             handleLeave
           );
 
-          /*
-           * Cleanup
-           */
-          ctx.add(() => {
+          removeTiltListeners.push(() => {
             card.removeEventListener(
               "mousemove",
               handleMove
@@ -392,20 +338,19 @@ card.style.perspective = "800px";
               "mouseleave",
               handleLeave
             );
+
+            gsap.set(card, {
+              clearProps: "transform,perspective",
+            });
           });
         });
       }
 
-      /*
-       * ==========================================================
-       * STATS
-       * ==========================================================
-       */
+      /* ================= STATS ================= */
 
-      const statItems =
-        gsap.utils.toArray<HTMLElement>(
-          ".stat-item"
-        );
+      const statItems = gsap.utils.toArray<HTMLElement>(
+        ".stat-item"
+      );
 
       if (statItems.length) {
         gsap.set(statItems, {
@@ -415,40 +360,27 @@ card.style.perspective = "800px";
 
         ScrollTrigger.create({
           trigger: "#statsRow",
-
           start: "top 88%",
-
           once: true,
-
-          invalidateOnRefresh: true,
 
           onEnter: () => {
             gsap.to(statItems, {
               opacity: 1,
               y: 0,
-
               duration: 0.55,
-
               stagger: 0.08,
-
               ease: "power3.out",
-
-              overwrite: "auto",
+              overwrite: true,
             });
           },
         });
       }
 
-      /*
-       * ==========================================================
-       * PROCESS STEPS
-       * ==========================================================
-       */
+      /* ================= PROCESS ================= */
 
-      const processSteps =
-        gsap.utils.toArray<HTMLElement>(
-          ".process-step"
-        );
+      const processSteps = gsap.utils.toArray<HTMLElement>(
+        ".process-step"
+      );
 
       if (processSteps.length) {
         gsap.set(processSteps, {
@@ -458,59 +390,32 @@ card.style.perspective = "800px";
 
         ScrollTrigger.create({
           trigger: "#processRow",
-
           start: "top 85%",
-
           once: true,
-
-          invalidateOnRefresh: true,
 
           onEnter: () => {
             gsap.to(processSteps, {
               opacity: 1,
               y: 0,
-
               duration: 0.55,
-
               stagger: 0.12,
-
               ease: "power3.out",
-
-              overwrite: "auto",
+              overwrite: true,
             });
           },
         });
       }
 
-      /*
-       * ==========================================================
-       * RESPONSIVE REFRESH
-       *
-       * Important because your cards change from:
-       *
-       * Desktop:
-       * grid
-       *
-       * Mobile:
-       * sticky vertical cards
-       *
-       * ==========================================================
-       */
+      /* ================= REFRESH ================= */
 
       const refresh = () => {
         ScrollTrigger.refresh();
       };
 
-      /*
-       * Give browser a chance to finish layout.
-       */
       requestAnimationFrame(() => {
-        requestAnimationFrame(refresh);
+        ScrollTrigger.refresh();
       });
 
-      /*
-       * Refresh after resize/orientation changes.
-       */
       window.addEventListener(
         "resize",
         refresh
@@ -521,10 +426,11 @@ card.style.perspective = "800px";
         refresh
       );
 
-      /*
-       * Cleanup listeners.
-       */
-      ctx.add(() => {
+      return () => {
+        removeTiltListeners.forEach(
+          (cleanup) => cleanup()
+        );
+
         window.removeEventListener(
           "resize",
           refresh
@@ -534,22 +440,11 @@ card.style.perspective = "800px";
           "orientationchange",
           refresh
         );
-      });
+      };
     });
-
-    /*
-     * ============================================================
-     * CLEANUP
-     * ============================================================
-     */
 
     return () => {
       ctx.revert();
-
-      /*
-       * Refresh after cleanup so ScrollTrigger
-       * recalculates the page correctly.
-       */
       ScrollTrigger.refresh();
     };
   }, []);
