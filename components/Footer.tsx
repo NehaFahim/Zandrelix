@@ -3,14 +3,11 @@ import Link from "next/link";
 import {
   FacebookIcon,
   InstagramIcon,
-  TwitterIcon,
-  YoutubeIcon,
   MailIcon,
   PhoneIcon,
-  PinIcon,
   ClockIcon,
 } from "./FooterIcons";
-import { LinkedinIcon } from "lucide-react";
+import { Globe2, LinkedinIcon } from "lucide-react";
 import { FaXTwitter } from "react-icons/fa6";
 
 const quickLinks = [
@@ -32,11 +29,11 @@ const services = [
   "Custom Digital Solutions",
 ];
 const socials = [
-  { icon: <LinkedinIcon />, label: "LinkedIn", href: "#" },
-  { icon: <FacebookIcon />, label: "Facebook", href: "#" },
-  { icon: <InstagramIcon />, label: "Instagram", href: "#" },
+  { icon: <LinkedinIcon />, label: "LinkedIn", href: "https://www.linkedin.com/company/zandrelix/" },
+  { icon: <FacebookIcon />, label: "Facebook", href: "https://www.facebook.com/share/1DNZD6xZu6/" },
+  { icon: <InstagramIcon />, label: "Instagram", href: "https://www.instagram.com/zandrelix?igsh=MW0wMHp2M2hnOGtndA==" },
   { icon: <FaXTwitter/>, label: "Twitter", href: "#" },
-  { icon: <YoutubeIcon />, label: "YouTube", href: "#" },
+  // { icon: <YoutubeIcon />, label: "YouTube", href: "#" },
 ];
 
 export default function Footer() {
@@ -115,19 +112,25 @@ export default function Footer() {
               <li className="flex items-center gap-3">
                 <MailIcon />
                 <a href="mailto:info@zandrelix.com" className="text-muted text-[13.5px] hover:text-brand-400 transition-colors">
-                  info@zandrelix.com
+                  hello@zandrelix.com
                 </a>
               </li>
               <li className="flex items-center gap-3">
                 <PhoneIcon />
                 <a href="tel:+923001234567" className="text-muted text-[13.5px] hover:text-brand-400 transition-colors">
-                  +92 300 1234567
+                  +92 3014685576
                 </a>
               </li>
-              <li className="flex items-center gap-3">
-                <PinIcon />
-                <span className="text-muted text-[13.5px]">Pakistan · Working Globally</span>
-              </li>
+             <li className="flex items-center gap-3">
+  <Globe2
+    size={16}
+    strokeWidth={1.7}
+    className="text-[#5b8def]"
+  />
+  <span className="text-muted text-[13.5px]">
+    Worldwide
+  </span>
+</li>
               <li className="flex items-center gap-3">
                 <ClockIcon />
                 <span className="text-muted text-[13.5px]">Available 24/7</span>

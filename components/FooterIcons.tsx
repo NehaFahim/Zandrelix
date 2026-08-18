@@ -24,14 +24,14 @@ export function TwitterIcon() {
   );
 }
 
-export function YoutubeIcon() {
-  return (
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
-      <rect x="2.5" y="5.5" width="19" height="13" rx="4" />
-      <path d="M10.5 9.5v5l4.3-2.5-4.3-2.5Z" fill="currentColor" stroke="none" />
-    </svg>
-  );
-}
+// export function YoutubeIcon() {
+//   return (
+//     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
+//       <rect x="2.5" y="5.5" width="19" height="13" rx="4" />
+//       <path d="M10.5 9.5v5l4.3-2.5-4.3-2.5Z" fill="currentColor" stroke="none" />
+//     </svg>
+//   );
+// }
 
 export function MailIcon() {
   return (
@@ -50,7 +50,7 @@ export function PhoneIcon() {
   );
 }
 
-export function PinIcon() {
+export function Globe2() {
   return (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5b8def" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
       <path d="M20 10.4c0 6.1-8 12.1-8 12.1s-8-6-8-12.1a8 8 0 1 1 16 0Z" />

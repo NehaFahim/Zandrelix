@@ -17,8 +17,9 @@ import {
   WhatsappIcon,
   LinkedinFillIcon,
   InstagramFillIcon,
+  FacebookFillIcon,
 } from "@/components/ContactIcons";
-import { YoutubeIcon } from "@/components/FooterIcons";
+// import { YoutubeIcon } from "@/components/FooterIcons";
 import { FaXTwitter } from "react-icons/fa6";
 
 export const metadata: Metadata = {
@@ -38,9 +39,9 @@ const contactInfo = [
   {
     icon: <PhoneGlowIcon />,
     label: "Call Us",
-    value: "+1 (800) 123-4567",
+    value: "+92 3014685576",
     note: "Available 24/7",
-    href: "https://wa.me/18001234567",
+    href: "https://wa.me/03014685576",
     external: true,
   },
   {
@@ -59,11 +60,12 @@ const features = [
 ];
 
 const socials = [
-  { icon: <WhatsappIcon />, label: "WhatsApp", href: "#" },
-  { icon: <LinkedinFillIcon />, label: "LinkedIn", href: "#" },
-  { icon: <InstagramFillIcon />, label: "Instagram", href: "#" },
+  { icon: <WhatsappIcon />, label: "WhatsApp", href: "https://wa.me/03014685576" },
+  { icon: <LinkedinFillIcon />, label: "LinkedIn", href: "https://www.linkedin.com/company/zandrelix/" },
+   { icon: <FacebookFillIcon />, label: "Facebook", href: "https://www.facebook.com/share/1DNZD6xZu6/" },
+  { icon: <InstagramFillIcon />, label: "Instagram", href: "https://www.instagram.com/zandrelix?igsh=MW0wMHp2M2hnOGtndA==" },
   { icon: <FaXTwitter />, label: "Twitter", href: "#" },
-   { icon: <YoutubeIcon />, label: "YouTube", href: "#" },
+  //  { icon: <YoutubeIcon />, label: "YouTube", href: "#" },
 
 ];
 

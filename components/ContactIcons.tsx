@@ -119,6 +119,14 @@ export function LinkedinFillIcon() {
   );
 }
 
+export function FacebookFillIcon() {
+  return (
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M13.5 22v-8.4h2.8l.42-3.26h-3.22V8.24c0-.94.26-1.58 1.6-1.58h1.72V3.74C16.5 3.7 15.53 3.6 14.4 3.6c-2.35 0-3.96 1.44-3.96 4.08v2.66H7.62v3.26h2.82V22h3.06Z" />
+    </svg>
+  );
+}
+
 export function InstagramFillIcon() {
   return (
     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
