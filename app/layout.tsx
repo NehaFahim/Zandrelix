@@ -48,14 +48,14 @@ export const metadata: Metadata = {
     title: "Zandrelix",
     description:
       "Zandrelix is a digital solutions company that helps startups and businesses grow with modern websites, mobile apps, shopify stores and creative design.",
-    images: [{ url: "/app/opengraph-image.png", width: 512, height: 512, alt: "Zandrelix" }],
+    images: [{ url: "/images/zandrelix-logo.png", width: 512, height: 512, alt: "Zandrelix" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Zandrelix",
     description:
       "Zandrelix is a digital solutions company that helps startups and businesses grow with modern websites, mobile apps, shopify stores and creative design.",
-    images: ["/app/opengraph-image.png"],
+    images: ["/images/zandrelix-logo.png"],
   },
 };
 
