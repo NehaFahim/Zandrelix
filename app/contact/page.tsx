@@ -41,7 +41,7 @@ const contactInfo = [
     label: "Call Us",
     value: "+92 3172588129",
     note: "Available 24/7",
-    href: "https://wa.me/03014685576",
+    href: "https://wa.me/03172588129",
     external: true,
   },
   {
@@ -64,7 +64,7 @@ const socials = [
   { icon: <LinkedinFillIcon />, label: "LinkedIn", href: "https://www.linkedin.com/company/zandrelix/" },
    { icon: <FacebookFillIcon />, label: "Facebook", href: "https://www.facebook.com/share/1DNZD6xZu6/" },
   { icon: <InstagramFillIcon />, label: "Instagram", href: "https://www.instagram.com/zandrelix?igsh=MW0wMHp2M2hnOGtndA==" },
-  { icon: <FaXTwitter />, label: "Twitter", href: "#" },
+  { icon: <FaXTwitter />, label: "Twitter", href: "https://x.com/zandrelix?s=20" },
   //  { icon: <YoutubeIcon />, label: "YouTube", href: "#" },
 
 ];

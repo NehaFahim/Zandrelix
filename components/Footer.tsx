@@ -32,7 +32,7 @@ const socials = [
   { icon: <LinkedinIcon />, label: "LinkedIn", href: "https://www.linkedin.com/company/zandrelix/" },
   { icon: <FacebookIcon />, label: "Facebook", href: "https://www.facebook.com/share/1DNZD6xZu6/" },
   { icon: <InstagramIcon />, label: "Instagram", href: "https://www.instagram.com/zandrelix?igsh=MW0wMHp2M2hnOGtndA==" },
-  { icon: <FaXTwitter/>, label: "Twitter", href: "#" },
+  { icon: <FaXTwitter/>, label: "Twitter", href: "https://x.com/zandrelix?s=20" },
   // { icon: <YoutubeIcon />, label: "YouTube", href: "#" },
 ];
 
@@ -77,7 +77,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* Quick Links */} 
           <div>
             <h3 className="font-bold text-[15px] mb-5">Quick Links</h3>
             <ul className="space-y-3">
@@ -111,13 +111,13 @@ export default function Footer() {
             <ul className="space-y-4">
               <li className="flex items-center gap-3">
                 <MailIcon />
-                <a href="mailto:info@zandrelix.com" className="text-muted text-[13.5px] hover:text-brand-400 transition-colors">
+                <a href="mailto:hello@zandrelix.com" className="text-muted text-[13.5px] hover:text-brand-400 transition-colors">
                   hello@zandrelix.com
                 </a>
               </li>
               <li className="flex items-center gap-3">
                 <PhoneIcon />
-                <a href="tel:+923001234567" className="text-muted text-[13.5px] hover:text-brand-400 transition-colors">
+                <a href="tel:+923172588129" className="text-muted text-[13.5px] hover:text-brand-400 transition-colors">
                   +92 3172588129
                 </a>
               </li>
