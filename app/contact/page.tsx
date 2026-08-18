@@ -39,7 +39,7 @@ const contactInfo = [
   {
     icon: <PhoneGlowIcon />,
     label: "Call Us",
-    value: "+92 3014685576",
+    value: "+92 3172588129",
     note: "Available 24/7",
     href: "https://wa.me/03014685576",
     external: true,
@@ -60,7 +60,7 @@ const features = [
 ];
 
 const socials = [
-  { icon: <WhatsappIcon />, label: "WhatsApp", href: "https://wa.me/03014685576" },
+  { icon: <WhatsappIcon />, label: "WhatsApp", href: "https://wa.me/03172588129" },
   { icon: <LinkedinFillIcon />, label: "LinkedIn", href: "https://www.linkedin.com/company/zandrelix/" },
    { icon: <FacebookFillIcon />, label: "Facebook", href: "https://www.facebook.com/share/1DNZD6xZu6/" },
   { icon: <InstagramFillIcon />, label: "Instagram", href: "https://www.instagram.com/zandrelix?igsh=MW0wMHp2M2hnOGtndA==" },
