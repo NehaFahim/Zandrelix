@@ -41,20 +41,22 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
- openGraph: {
-  type: "website",
-  url: siteUrl,
-  siteName: "Zandrelix",
-  title: "Zandrelix",
-  description:
-    "Zandrelix is a digital solutions company that helps startups and businesses grow with modern websites, mobile apps, Shopify stores and creative design.",
-},
+  openGraph: {
+    type: "website",
+    url: siteUrl,
+    siteName: "Zandrelix",
+    title: "Zandrelix",
+    description:
+      "Zandrelix is a digital solutions company that helps startups and businesses grow with modern websites, mobile apps, shopify stores and creative design.",
+    images: [{ url: "/app/opengraph-image.png", width: 512, height: 512, alt: "Zandrelix" }],
+  },
   twitter: {
-  card: "summary_large_image",
-  title: "Zandrelix",
-  description:
-    "Zandrelix is a digital solutions company that helps startups and businesses grow with modern websites, mobile apps, Shopify stores and creative design.",
-},
+    card: "summary_large_image",
+    title: "Zandrelix",
+    description:
+      "Zandrelix is a digital solutions company that helps startups and businesses grow with modern websites, mobile apps, shopify stores and creative design.",
+    images: ["/app/opengraph-image.png"],
+  },
 };
 
 export const viewport: Viewport = {
