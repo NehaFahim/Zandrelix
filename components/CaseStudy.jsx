@@ -24,7 +24,7 @@ import {
   Phone,
   Clock,
 } from "lucide-react";
-const phoneNumber = "92300123456733"; 
+const phoneNumber = "+92 3172588129"; 
 
 const watsappMessage =
   "Hello! I'd like to discuss a project with your team.";
