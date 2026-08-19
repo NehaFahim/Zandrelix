@@ -18,49 +18,121 @@ export default function Manifesto() {
       gsap.registerPlugin(ScrollTrigger);
       registered = true;
     }
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
     const section = sectionRef.current;
     if (!section) return;
 
+    const reduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    const words = wordsRef.current;
+
     if (reduced) {
-      gsap.set(wordsRef.current, { opacity: 1 });
+      gsap.set(words, { opacity: 1 });
       return;
     }
 
-    const st = ScrollTrigger.create({
-      trigger: section,
-      start: "top top",
-      end: "+=120%",
-      pin: true,
-      scrub: 0.5,
-      onUpdate: (self) => {
-        const words = wordsRef.current;
-        const activeCount = Math.floor(self.progress * words.length);
-        words.forEach((w, i) => {
-          gsap.to(w, { opacity: i < activeCount ? 1 : 0.12, duration: 0.15, overwrite: "auto" });
-        });
-      },
-    });
+    const ctx = gsap.context(() => {
+      const st = ScrollTrigger.create({
+        trigger: section,
+        start: "top top",
+        end: "+=90%",
+        pin: true,
+        scrub: true,
 
-    return () => st.kill();
+        onUpdate: (self) => {
+          const activeCount = Math.floor(
+            self.progress * words.length
+          );
+
+          words.forEach((word, index) => {
+            word.style.opacity =
+              index < activeCount ? "1" : "0.12";
+          });
+        },
+      });
+
+      return () => {
+        st.kill();
+      };
+    }, section);
+
+    return () => {
+      ctx.revert();
+    };
   }, []);
 
   const words = STATEMENT.split(" ");
 
   return (
-    <section ref={sectionRef} className="relative h-screen flex items-center bg-bg0 overflow-hidden">
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full bg-brand-500/10 blur-[160px] pointer-events-none" />
-      <div className="max-w-[1200px] mx-auto px-16 relative z-10 max-xl:px-10 max-lg:px-6 max-sm:px-5">
-        <p className="font-extrabold text-[42px] leading-[1.3] tracking-[-0.5px] max-xl:text-[34px] max-lg:text-[26px] max-sm:text-[21px]">
-          {words.map((w, i) => (
+    <section
+      ref={sectionRef}
+      className="relative h-screen flex items-center bg-bg0 overflow-hidden"
+    >
+      {/* Background glow */}
+      <div
+        className="
+          absolute
+          left-1/2
+          top-1/2
+          -translate-x-1/2
+          -translate-y-1/2
+          w-[700px]
+          h-[700px]
+          sm:w-[800px]
+          sm:h-[800px]
+          rounded-full
+          bg-brand-500/10
+          blur-[120px]
+          sm:blur-[150px]
+          pointer-events-none
+        "
+      />
+
+      {/* Content */}
+      <div
+        className="
+          max-w-[1200px]
+          mx-auto
+          px-5
+          sm:px-6
+          lg:px-10
+          xl:px-16
+          relative
+          z-10
+        "
+      >
+        <p
+          className="
+            font-extrabold
+            text-[21px]
+            sm:text-[24px]
+            md:text-[26px]
+            lg:text-[34px]
+            xl:text-[42px]
+            leading-[1.3]
+            tracking-[-0.4px]
+          "
+        >
+          {words.map((word, index) => (
             <span
-              key={i}
+              key={index}
               ref={(el) => {
-                if (el) wordsRef.current[i] = el;
+                if (el) {
+                  wordsRef.current[index] = el;
+                }
               }}
-              className="inline-block mr-[0.28em] opacity-[0.12] transition-opacity"
+              className="
+                inline-block
+                mr-[0.28em]
+              "
+              style={{
+                opacity: 0.12,
+                willChange: "opacity",
+              }}
             >
-              {w}
+              {word}
             </span>
           ))}
         </p>
