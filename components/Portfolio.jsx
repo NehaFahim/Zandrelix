@@ -63,23 +63,23 @@ const projects = [
      liveUrl: "https://furniture-store-puce.vercel.app/",
      results: ["Premium Shopping Experience","Fully Responsive","Easy Product Management"]
 },
-{
+  {
     id: 4,
-    title: "MediInterpret AI",
-    category: "AI Development",
-    image: "/assets/mediinterpret.png",
-    description: "AI-powered medical document interpreter with English and Urdu support",
-    fullDescription: "MediInterpret AI is an AI-powered medical document interpretation application that helps users understand prescriptions and laboratory reports through simplified explanations. Built with React, TypeScript, Vite, and Google Gemini AI, it supports English and Urdu to improve accessibility. The platform features a responsive interface and provides educational, non-diagnostic medical information.",
-    tag: "AI Development",
-    rating: 4.8,
-    reviews: 34,
-    date: "Feb 2026",
-    work: "Google Developer Group AI Seekho Hackathon 2026",
-    technologies: ["React", "TypeScript", "Vite", "Google Gemini AI", "Tailwind CSS", "AI"],
-    features: ["Medical Document Analysis", "AI-Powered Interpretation", "English & Urdu Support", "Simplified Medical Explanations", "Responsive Interface"],
-    liveUrl: "https://medi-interpret-ai.vercel.app/",
-    results: ["Bilingual Medical Information Support", "AI-Powered Document Understanding", "Accessible Healthcare Information"]
-},
+    title: "Reismans Bakery",
+    category: "Website Development",
+    image: "/assets/bakery.jpg",
+    description: "Bakery website with online ordering and delivery system",
+    fullDescription: "Adil Bakers needed a delicious digital presence with online ordering capabilities. We built a mouth-watering website with integrated ordering system, delivery tracking, and a beautiful gallery showcasing their products.",
+    tag: "Website Development",
+    rating: 4.7,
+    reviews: 19,
+    date: "Sep 2024",
+    client: "Adil Bakers",
+    technologies: ["React", "Firebase", "Tailwind CSS"],
+    features: ["Online Ordering", "Delivery Tracking", "Product Gallery", "Customer Reviews"],
+    liveUrl: "https://reismansbakery.com/",
+    results: ["200% Online Orders", "4.7/5 Rating", "Happy Customers"]
+  },
   {
     id: 5,
     title: "Movie Discovery App",
@@ -99,23 +99,6 @@ const projects = [
   },
   {
     id: 6,
-    title: "Reismans Bakery",
-    category: "Website Development",
-    image: "/assets/bakery.jpg",
-    description: "Bakery website with online ordering and delivery system",
-    fullDescription: "Adil Bakers needed a delicious digital presence with online ordering capabilities. We built a mouth-watering website with integrated ordering system, delivery tracking, and a beautiful gallery showcasing their products.",
-    tag: "Website Development",
-    rating: 4.7,
-    reviews: 19,
-    date: "Sep 2024",
-    client: "Adil Bakers",
-    technologies: ["React", "Firebase", "Tailwind CSS"],
-    features: ["Online Ordering", "Delivery Tracking", "Product Gallery", "Customer Reviews"],
-    liveUrl: "https://reismansbakery.com/",
-    results: ["200% Online Orders", "4.7/5 Rating", "Happy Customers"]
-  },
-  {
-    id: 7,
     title: "AuditRanker Dashboard",
     category: "Web Application",
     image: "/assets/audit.jpg",
@@ -132,7 +115,7 @@ const projects = [
     results: ["500+ Businesses", "95% Satisfaction", "Real-time Data"]
   },
   {
-    id: 8,
+    id: 7,
     title: "PixelCraft Branding",
     category: "Branding",
     image: "/assets/pixel.jpg",
@@ -167,7 +150,7 @@ const projects = [
   //   results: ["1000+ Bookings", "4.8/5 Rating", "Premium Experience"]
   // }
   {
-id: 9,
+id: 8,
 title: "Business Nexus Platform",
 category: "Web Application",
 image: "/assets/b-nexus.png",
@@ -184,7 +167,7 @@ liveUrl: "https://nexus-app-brown.vercel.app/login",
 results: ["Streamlined Networking", "Centralized Dashboard", "Faster Collaboration"]
 },
 {
-id: 10,
+id: 9,
 title: "Secure Data Encryption System",
 category: "AI Web Application",
 image: "/assets/data.png",
@@ -201,7 +184,7 @@ liveUrl: "https://securedata05.streamlit.app/",
 results: ["...", "...", "..."]
 },
 {
-id: 11,
+id: 10,
 title: "Secure Password Generator",
 category: "AI Web Application",
 image: "/assets/password.png",

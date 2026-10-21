@@ -1,0 +1,40 @@
+diff --git a/app/page.tsx b/app/page.tsx
+index d08e27b..4aafbe3 100644
+--- a/app/page.tsx
++++ b/app/page.tsx
+@@ -607,7 +607,7 @@ export default function HomePage() {
+           </div>
+         </div>
+         </a>
+-      </div>z
++      </div>
+ 
+       {/* Project 4 */}
+       <div className="group rounded-xl border border-white/10 bg-card2/50 overflow-hidden hover:border-brand-500/30 transition-all duration-300">
+diff --git a/next-env.d.ts b/next-env.d.ts
+index ce4e94a..a419cbe 100644
+--- a/next-env.d.ts
++++ b/next-env.d.ts
+@@ -1,7 +1,7 @@
+ /// <reference types="next" />
+ /// <reference types="next/image-types/global" />
+-import "./.next/types/routes.d.ts";
+-import "./.next/types/root-params.d.ts";
++import "./.next/dev/types/routes.d.ts";
++import "./.next/dev/types/root-params.d.ts";
+ 
+ // NOTE: This file should not be edited
+ // see https://nextjs.org/docs/app/api-reference/config/typescript for more information.
+diff --git a/postcss.config.js b/postcss.config.js
+index 12a703d..490cc0d 100644
+--- a/postcss.config.js
++++ b/postcss.config.js
+@@ -1,6 +1,6 @@
++
+ module.exports = {
+   plugins: {
+-    tailwindcss: {},
+-    autoprefixer: {},
++    "@tailwindcss/postcss": {},
+   },
+ };
