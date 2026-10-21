@@ -607,7 +607,7 @@ export default function HomePage() {
           </div>
         </div>
         </a>
-      </div>
+      </div>z
 
       {/* Project 4 */}
       <div className="group rounded-xl border border-white/10 bg-card2/50 overflow-hidden hover:border-brand-500/30 transition-all duration-300">
